@@ -1,0 +1,39 @@
+version: '3'
+services:
+  nginx:
+    depends_on:
+      - api
+      - client
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./nginx
+    ports:
+      - '5050:80'
+  postgres:
+    image: 'postgres:latest'
+    environment:
+      - POSTGRES_PASSWORD=password
+  api:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./server
+    volumes:
+      - /home/node/app/node_modules
+      - ./server:/home/node/app
+    environment:
+      - PGUSER=postgres
+      - PGHOST=postgres
+      - PGDATABASE=postgres
+      - PGPASSWORD=password
+      - PGPORT=5432
+  client:
+    environment:
+      - WDS_SOCKET_PORT=0
+    build:
+      context: ./client
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /home/node/app/node_modules
+      - ./client:/home/node/app
+    
