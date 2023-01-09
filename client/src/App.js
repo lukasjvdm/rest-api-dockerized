@@ -7,6 +7,7 @@ function App() {
   return (
     <Router>
       <div>
+      <h3>HOSTED ON AWS</h3>
         <div>
           <Route exact path="/" component={Users} />
         </div>
