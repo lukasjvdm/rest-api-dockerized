@@ -15,7 +15,7 @@ jobs:
 
       - run: docker build -t lukasjvdm/rest-api-client ./client
       - run: docker build -t lukasjvdm/rest-api-nginx ./nginx
-          - run: docker build -t lukasjvdm/rest-api-server ./server
+      - run: docker build -t lukasjvdm/rest-api-server ./server
 
       - run: docker push lukasjvdm/rest-api-client
       - run: docker push lukasjvdm/rest-api-nginx
